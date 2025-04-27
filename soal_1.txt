@@ -1,0 +1,80 @@
+# 1. Definisi Gejala & Hama
+Gejala yang diberikan:
+- Daun menguning
+- Terdapat bercak hitam
+- Daun berlubang
+- Tanaman layu
+
+## Contoh Hama yang akan dideteksi:
+- Ulat Grayak
+- Wereng
+- Kutu Daun
+- Jamur Patogen
+
+# 2. Logika Proposisional
+Kita simbolkan gejala sebagai:
+- G1: daun menguning
+- G2: bercak hitam
+- G3: daun berlubang
+- G4: tanaman layu
+
+Aturan:
+1. IF G1 ∧ G4 THEN Wereng
+2. IF G2 ∧ G4 THEN Jamur Patogen
+3. IF G3 ∧ G1 THEN Ulat Grayak
+4. IF G1 ∧ G2 ∧ G4 THEN Kutu Daun
+
+# 3. Pseudocode
+```
+INPUT: gejala (G1, G2, G3, G4)
+IF G1 AND G4:
+    kemungkinan_hama ← "Wereng"
+IF G2 AND G4:
+    kemungkinan_hama ← "Jamur Patogen"
+IF G3 AND G1:
+    kemungkinan_hama ← "Ulat Grayak"
+IF G1 AND G2 AND G4:
+    kemungkinan_hama ← "Kutu Daun"
+OUTPUT: kemungkinan_hama
+```
+
+# 4. Python Implementation
+```Python
+def deteksi_hama(gejala):
+    G1 = gejala.get("daun_menguning", False)
+    G2 = gejala.get("bercak_hitam", False)
+    G3 = gejala.get("daun_berlubang", False)
+    G4 = gejala.get("tanaman_layu", False)
+
+    hasil = []
+
+    if G1 and G4:
+        hasil.append("Wereng")
+    if G2 and G4:
+        hasil.append("Jamur Patogen")
+    if G3 and G1:
+        hasil.append("Ulat Grayak")
+    if G1 and G2 and G4:
+        hasil.append("Kutu Daun")
+
+    if not hasil:
+        return "Hama tidak teridentifikasi berdasarkan gejala yang diberikan."
+    return "Hama yang terdeteksi: " + ', '.join(set(hasil))
+    
+# Contoh penggunaan:
+gejala_input = {
+    "daun_menguning": True,
+    "bercak_hitam": True,
+    "daun_berlubang": False,
+    "tanaman_layu": True
+}
+
+print(deteksi_hama(gejala_input))
+
+```
+
+# 5. Alur Inferensi (Input ➡️ Output)
+1. Input: User memilih/menandai gejala-gejala yang diamati di tanaman.
+2. Fakta: Program menyimpan gejala sebagai fakta True/False.
+3. Inferensi: Aturan-aturan dijalankan menggunakan logika AND terhadap kombinasi gejala.
+4. Output: Program menyimpulkan satu atau lebih hama yang cocok dengan gejala tersebut.
